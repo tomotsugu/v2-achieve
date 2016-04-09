@@ -1,0 +1,8 @@
+<h1>ブログ一覧</h1>
+
+<% @blogs.each do |blog| %>
+  <p>タイトル:<%= blog.title %></p>
+  <p>本文:<%= blog.content %></p>
+<% end %>
+
+<%= link_to "ブログを作成する", new_blog_path %>
