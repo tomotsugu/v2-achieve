@@ -4,8 +4,12 @@ class ContactsController < ApplicationController
   end
 
   def create
-    Contact.create(contacts_params)
-    redirect_to action: 'new'
+    @contact = Contact.new(contacts_params)
+    if @contact.save
+      redirect_to action: 'new'
+    else
+      render action: 'new'
+    end
   end
   
   private
