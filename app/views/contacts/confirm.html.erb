@@ -1,0 +1,18 @@
+<h3>以下の内容で、送信する。</h3>
+
+<%= form_for(@contact) do |f| %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :email %>
+  <%= f.hidden_field :content %>
+  <p>タイトル:<%= @contact.name %></p>
+  <p>本文:<%= @contact.email %></p>  
+  <p>本文:<%= @contact.content %></p>
+  <%= f.submit "登録する" %>
+<% end %>
+
+<%= form_for(@contact, url: new_contact_path, method: 'get') do |f| %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :email %>
+  <%= f.hidden_field :content %>
+  <%= f.submit "もどる", name: 'back' %>
+<% end %>
