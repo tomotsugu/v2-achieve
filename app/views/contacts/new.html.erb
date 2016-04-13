@@ -1,6 +1,6 @@
 <p><%= notice %></p>
 
-<%= form_for(@contact) do |f| %> 
+<%= form_for(@contact, url: confirm_contacts_path) do |f| %> 
   <% if @contact.errors.any? %>
     <div id="error_explanation">
       <h2><%= @contact.errors.count %>件のエラーがあります。</h2>
