@@ -6,7 +6,16 @@ class BlogsController < ApplicationController
   end
   
   def new 
-    @blog = Blog.new
+    if params[:back]
+      @blog = Blog.new(blogs_params)
+    else
+      @blog = Blog.new
+    end
+  end
+  
+  def confirm
+    @blog = Blog.new(blogs_params)
+    render :new if @blog.invalid?
   end
   
   def create
@@ -19,6 +28,8 @@ class BlogsController < ApplicationController
   end
   
   def edit
+        # binding.pry
+
   end
   
   def update

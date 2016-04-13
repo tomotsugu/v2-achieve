@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :blogs, only: [:index, :new, :create, :edit, :update ,:destroy]
+  resources :blogs, only: [:index, :new, :create, :edit, :update ,:destroy] do 
+    collection do 
+      post :confirm
+    end
+    member do
+      patch :confirm
+    end
+  end
+  
   resources :contacts, only: [:new, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.
