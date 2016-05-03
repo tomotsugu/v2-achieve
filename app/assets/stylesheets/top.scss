@@ -26,7 +26,6 @@ header {
 // }
 
 .main-header {
-  padding-top: 16%;
   padding-bottom: 15%;
   width: 100%;
   background-size: cover;
@@ -38,6 +37,7 @@ header {
   display: block;
   margin: 0 auto;
   width: 25%;
+  padding-top: 16%;
 }
 
 .about {
@@ -148,4 +148,9 @@ footer {  /*<footer class="footer">*/
       background-color: transparent;
     }
   }
+}
+
+.flash {
+  color: white;
+  padding-top: 10px;
 }
