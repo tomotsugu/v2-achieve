@@ -2,14 +2,18 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:edit, :update, :destroy]
   
   def index
-    @blogs = Blog.all
+    @blogs = Blog.all 
+    raise
+    binding.pry
   end
   
   def new 
     if params[:back]
       @blog = Blog.new(blogs_params)
+
     else
       @blog = Blog.new
+            binding.pry
     end
   end
   
@@ -22,6 +26,7 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blogs_params)
     if @blog.save
       redirect_to blogs_path, notice: "ブログを作成しました！"
+      NoticeMailer.sendmail_confirm(@blog).deliver
     else
       render action: 'new'
     end

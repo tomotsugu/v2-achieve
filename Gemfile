@@ -44,5 +44,10 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+group :development do 
+  gem 'letter_opener' 
+end
+
+
 gem "twitter-bootstrap-rails"
 gem "devise"
