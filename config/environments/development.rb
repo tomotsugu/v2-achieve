@@ -11,7 +11,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = false #開発環境でも本番と同様のエラーがでるようにした
+  config.consider_all_requests_local       = true #開発環境でも本番と同様のエラーがでるようにした
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.

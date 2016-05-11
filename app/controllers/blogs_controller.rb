@@ -3,14 +3,11 @@ class BlogsController < ApplicationController
   
   def index
     @blogs = Blog.all 
-    raise
-    binding.pry
   end
   
   def new 
     if params[:back]
       @blog = Blog.new(blogs_params)
-
     else
       @blog = Blog.new
     end
