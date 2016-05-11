@@ -13,7 +13,6 @@ class BlogsController < ApplicationController
 
     else
       @blog = Blog.new
-            binding.pry
     end
   end
   
