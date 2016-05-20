@@ -47,6 +47,7 @@ end
 
 group :development do 
   gem 'letter_opener' 
+  gem 'dotenv-rails'
 end
 
 
@@ -55,3 +56,12 @@ gem "devise"
 gem 'rails_admin'
 gem 'cancan'
 gem 'rails_12factor', group: :production
+
+#Oauth
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
+#image uploader
+gem 'carrierwave'
+gem 'rmagick'

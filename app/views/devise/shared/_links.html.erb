@@ -36,10 +36,6 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-<<<<<<< HEAD
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
-=======
     <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
->>>>>>> b3d0097d83e86bfab9c22a6348a10eaf701a1519
   <% end -%>
 <% end -%>
