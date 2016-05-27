@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tasks
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { 
     # sessions: "users/sessions", 
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resources :mypage, only: [:index, :show, :edit, :update]
+    resources :task
   end
 
 
