@@ -2,11 +2,17 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { 
     # sessions: "users/sessions", 
-    # registrations: "users/registrations", 
+    registrations: "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks" 
 }
 
-  resources :users, only: [:show, :edit, :update]
+  namespace :users do
+    resources :mypage, only: [:index, :show, :edit, :update]
+  end
+
+
+  resources :relationships, only: [:create, :destroy]
+  # resources :users, only: [:show, :edit, :update]
   
   resources :blogs, only: [:index, :new, :create, :edit, :update ,:destroy] do 
     collection do 
