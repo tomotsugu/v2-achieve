@@ -7,9 +7,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks" 
 }
 
-  namespace :users do
-    resources :mypage, only: [:index, :show, :edit, :update]
-    resources :task
+  resources :users, only: [:index, :show, :edit, :update] do
+    resources :tasks
   end
 
 

@@ -1,10 +1,15 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
+
+
   def index
-    @tasks = Task.all
+    @tasks = Task.where(user_id: params[:user_id]).where.not(done: true)
+                 .order(updated_at: :desc)
+    @user = User.find(params[:user_id])
   end
 
   # GET /tasks/1
@@ -14,7 +19,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = Task.new(user_id: params[:user_id], charge_id: params[:user_id])
   end
 
   # GET /tasks/1/edit
@@ -28,7 +33,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to user_tasks_url, notice: 'タスクを登録しました。' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -42,7 +47,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to user_tasks_url, notice: 'タスクを編集しました。' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to user_tasks_url, notice: 'タスクを削除しました。' }
       format.json { head :no_content }
     end
   end
@@ -70,5 +75,10 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:user_id, :title, :content, :deadline, :charge_id, :done, :status)
+    end
+
+    def correct_user
+      @user = User.find(params[:user_id])
+      redirect_to(user_tasks_path(current_user)) unless current_user == @user
     end
 end
