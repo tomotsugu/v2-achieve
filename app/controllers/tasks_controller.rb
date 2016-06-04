@@ -7,9 +7,7 @@ class TasksController < ApplicationController
 
 
   def index
-    @tasks = Task.where(user_id: params[:user_id]).where.not(done: true)
-                 .order(updated_at: :desc)
-    @user = User.find(params[:user_id])
+    @submit_requests = SubmitRequest.where(user_id: current_user.id).order(updated_at: :desc)
   end
 
   # GET /tasks/1

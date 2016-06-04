@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
 
   has_many :tasks, dependent: :destroy
-
-
+  has_many :submit_requests, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 
@@ -57,5 +56,11 @@ class User < ActiveRecord::Base
   #フォローしているかどうかを確認する
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
+  end
+
+  #フォローし合っている人を取得する
+  def friend
+    followed_user_ids = "SELECT X.id FROM (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.followed_id WHERE relationships.follower_id = :user_id ) X INNER JOIN (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.follower_id WHERE relationships.followed_id = :user_id ) Y ON X.id = Y.id"
+    User.where("id IN (#{followed_user_ids})", user_id: self.id)
   end
 end

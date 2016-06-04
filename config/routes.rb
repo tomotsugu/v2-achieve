@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :tasks
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { 
     # sessions: "users/sessions", 
@@ -7,8 +6,16 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks" 
 }
 
-  resources :users, only: [:index, :show, :edit, :update] do
+  resources :users, only: [:index, :show, :update] do
     resources :tasks
+    resources :submit_requests , shallow: true do
+      get 'approve'
+      get 'unapprove'
+      get 'reject'
+      collection do
+        get 'inbox'
+      end
+    end
   end
 
 
